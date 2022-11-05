@@ -12,6 +12,5 @@ export const PageWrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  margin: 0 auto;
-  max-width: 970px;
+  margin: 0 12px;
 `;

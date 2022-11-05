@@ -1,0 +1,5 @@
+@font-face {
+    font-family: "Roboto";
+    font-display: fallback;
+    src: url(https://fonts.googleapis.com/css?family=Roboto:400,500,600,700&display=swap&subset=cyrillic-ext);
+}

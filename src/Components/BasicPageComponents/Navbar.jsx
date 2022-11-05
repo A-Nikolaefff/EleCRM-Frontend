@@ -2,22 +2,44 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {Container} from "../../Styles/basicPageComponents";
+import {fontTitle, mainColor, primaryColor} from "../../Styles/globalVariables";
 
 const StyledNavbar = styled.div`
-      background-color: #c4ffe6;
+`;
+const NavbarContainer = styled(Container)`
+  padding: 5px 0;
+  border-top: 1px #787878 solid;
+  border-bottom: 1px #787878 solid;
+`
+const LinkItems = styled.div`
+  display: flex;
     `;
-const Links = styled.div`
-    `;
+const StyledLink = styled(Link)`
+  margin: 0 15px 0 0;
+  font-family: ${fontTitle};
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: ${mainColor};
+  transition: color 0.3s ease 0s;
+  &:nth-last-child(1) {
+    margin: 0 0 0 0;
+  }
+  &:hover {
+    color: ${primaryColor};
+  }
+`
 
 const Navbar = () => {
     return (
         <StyledNavbar>
-            <Container>
-                <Links>
-                    <Link to="/requests">Заявки</Link>
-                    <Link to="/about">О сайте</Link>
-                </Links>
-            </Container>
+            <NavbarContainer>
+                <LinkItems>
+                    <StyledLink to="/requests">Заявки</StyledLink>
+                    <StyledLink to="/requests">Заказы</StyledLink>
+                    <StyledLink to="/about">О приложении</StyledLink>
+                </LinkItems>
+            </NavbarContainer>
         </StyledNavbar>
     );
 };

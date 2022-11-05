@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import {fontText, fontTitle} from "./globalVariables";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -12,6 +13,20 @@ const GlobalStyle = createGlobalStyle`
   #root {
     height: 100%;
   }
+  
+  #root {
+    font-family: ${fontText};
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: ${fontTitle};
+  }
+  
   `;
 
 export default GlobalStyle;

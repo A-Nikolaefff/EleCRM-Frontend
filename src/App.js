@@ -1,5 +1,5 @@
 import React from "react";
-import GlobalStyle from './Styles/global'
+import GlobalStyle from './Styles/globalStyle'
 import {BrowserRouter} from "react-router-dom";
 import AppRouter from "./Components/AppRouter";
 import {Page, PageWrapper, Container} from "./Styles/basicPageComponents";

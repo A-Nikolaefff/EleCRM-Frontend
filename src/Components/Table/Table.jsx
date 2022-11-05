@@ -11,7 +11,12 @@ const Table = ({ columns, data }) => {
     } = useTable({
         columns,
         data,
-    })
+        initialState: {
+            hiddenColumns: columns.map(column => {
+                if (column.show === false) return column.accessor || column.id;
+            }),
+        },
+    });
 
     return (
         <table {...getTableProps()}>

@@ -8,6 +8,7 @@ const RequestList = ({requests}) => {
             {
                 Header: 'ID',
                 accessor: 'id',
+                show: false,
             },
             {
                 Header: 'Date',
