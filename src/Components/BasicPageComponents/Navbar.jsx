@@ -1,24 +1,24 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import { Container } from "../../styles/components"
 import styled from "styled-components";
+import {Container} from "../../Styles/basicPageComponents";
 
-const Navbar = () => {
-    const Navbar = styled.div`
+const StyledNavbar = styled.div`
       background-color: #c4ffe6;
     `;
-    const Links = styled.div`
+const Links = styled.div`
     `;
 
+const Navbar = () => {
     return (
-        <Navbar>
+        <StyledNavbar>
             <Container>
                 <Links>
                     <Link to="/requests">Заявки</Link>
                     <Link to="/about">О сайте</Link>
                 </Links>
             </Container>
-        </Navbar>
+        </StyledNavbar>
     );
 };
 

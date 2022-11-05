@@ -1,6 +1,6 @@
 import React from 'react';
-import Table from "./UI/Table";
-import {TableWrapper} from "../styles/components";
+import Table from "./Table/Table";
+import TableWrapper from "./Table/TableWrapper";
 
 const RequestList = ({requests}) => {
     const columns = React.useMemo(

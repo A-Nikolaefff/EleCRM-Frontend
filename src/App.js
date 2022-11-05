@@ -1,38 +1,26 @@
 import React from "react";
-
+import GlobalStyle from './Styles/global'
 import {BrowserRouter} from "react-router-dom";
-import Navbar from "./components/UI/Navbar";
-import AppRouter from "./components/AppRouter";
-import styled from 'styled-components'
-import GlobalStyle from './styles/global'
-import Footer from "./components/UI/Footer";
-import {Container} from "./styles/components";
+import AppRouter from "./Components/AppRouter";
+import {Page, PageWrapper, Container} from "./Styles/basicPageComponents";
+import Footer from "./Components/BasicPageComponents/Footer";
+import Navbar from "./Components/BasicPageComponents/Navbar";
+import Header from "./Components/BasicPageComponents/Header";
 
 function App() {
-    const Wrapper = styled.div`
-      width: 100%;
-      height: 100%;
-
-      display: flex;
-      flex-direction: column;
-    `;
-
-    const Page = styled.div`
-      flex: 1 0 auto;
-    `;
-
     return (
         <BrowserRouter>
-            <Wrapper>
+            <PageWrapper>
                 <GlobalStyle/>
+                <Header/>
+                <Navbar/>
                 <Page>
-                    <Navbar/>
                     <Container>
                         <AppRouter/>
                     </Container>
                 </Page>
                 <Footer/>
-            </Wrapper>
+            </PageWrapper>
         </BrowserRouter>
     );
 }

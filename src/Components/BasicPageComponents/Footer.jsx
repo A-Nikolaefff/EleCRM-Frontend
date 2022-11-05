@@ -1,19 +1,22 @@
 import React from 'react';
 import styled from "styled-components";
-import {Container} from "../../styles/components";
+import {Container} from "../../Styles/basicPageComponents";
 
-const Footer = () => {
-    const Footer = styled.div`
+
+const StyledFooter = styled.div`
       flex: 0 0 auto;
       background-color: #463f3f;
       color: white;
     `;
+
+const Footer = () => {
+
     return (
-        <Footer>
+        <StyledFooter>
             <Container>
                 Это будущий футер
             </Container>
-        </Footer>
+        </StyledFooter>
     );
 };
 

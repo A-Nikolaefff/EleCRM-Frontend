@@ -1,11 +1,7 @@
-import styled from 'styled-components'
+import React from 'react';
+import styled from "styled-components";
 
-export const Container = styled.div`
-      margin: 0 auto;
-      max-width: 970px;
-    `;
-
-export const TableWrapper = styled.div`
+const StyledTableWrapper = styled.div`
   padding: 1rem;
 
   table {
@@ -32,3 +28,13 @@ export const TableWrapper = styled.div`
       }
     }
   }`;
+
+const TableWrapper = ({children}) => {
+    return (
+        <StyledTableWrapper>
+            {children}
+        </StyledTableWrapper>
+    );
+};
+
+export default TableWrapper;
