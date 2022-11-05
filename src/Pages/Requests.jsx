@@ -38,7 +38,7 @@ const Requests = () => {
             <RequestList requests={requests}/>
             <LastElement ref={lastElement}/>
             {isRequestsLoading &&
-               <LoaderWrapper>
+                <LoaderWrapper>
                     <Loader/>
                 </LoaderWrapper>
             }
