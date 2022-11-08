@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
-const StyledTableWrapper = styled.div`
+const StyledTable = styled.div`
   padding: 1rem;
 
   table {
@@ -29,12 +29,12 @@ const StyledTableWrapper = styled.div`
     }
   }`;
 
-const TableWrapper = ({children}) => {
+const StyledTableWrapper = ({children}) => {
     return (
-        <StyledTableWrapper>
+        <StyledTable>
             {children}
-        </StyledTableWrapper>
+        </StyledTable>
     );
 };
 
-export default TableWrapper;
+export default StyledTableWrapper;

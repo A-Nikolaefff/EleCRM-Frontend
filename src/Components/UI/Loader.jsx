@@ -2,16 +2,16 @@ import React from 'react';
 import styled from "styled-components";
 import {keyframes} from "styled-components";
 
-const Loader = () => {
-    const rotation = keyframes`
+const rotation = keyframes`
       from {
         transform: rotate(0deg);
       }
       to {
         transform: rotate(359deg);
       }
-    `
-    const Loader = styled.div`
+    `;
+
+const StyledLoader = styled.div`
       height: 60px;
       width: 60px;
       position: absolute;
@@ -39,9 +39,11 @@ const Loader = () => {
         border-right:6px solid transparent;
         border-radius:100%;
       }
-    `
+    `;
+
+const Loader = () => {
     return (
-        <Loader/>
+        <StyledLoader/>
     );
 };
 

@@ -5,8 +5,12 @@ export default class RequestService {
         return await axios.get('/api/requests', {
             params: {
                 limit: limit,
-                page: page
+                page: page,
+                sort: '-number',
             }
         });
+    }
+    static async Create(createRequestDto) {
+        return await axios.post('/api/requests', createRequestDto);
     }
 }

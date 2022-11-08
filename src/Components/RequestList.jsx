@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from "./Table/Table";
-import TableWrapper from "./Table/TableWrapper";
+import StyledTableWrapper from "./Table/StyledTableWrapper";
 
 const RequestList = ({requests}) => {
     const columns = React.useMemo(
@@ -11,11 +11,15 @@ const RequestList = ({requests}) => {
                 show: false,
             },
             {
-                Header: 'Date',
-                accessor: 'date',
+                Header: 'Номер',
+                accessor: 'number',
             },
             {
-                Header: 'Note',
+                Header: 'Дата поступления',
+                accessor: 'receiptDate',
+            },
+            {
+                Header: 'Комментарий',
                 accessor: 'note',
             },
         ],
@@ -24,9 +28,9 @@ const RequestList = ({requests}) => {
 
     return (
         <div>
-            <TableWrapper>
+            <StyledTableWrapper>
                 <Table columns={columns} data={requests} />
-            </TableWrapper>
+            </StyledTableWrapper>
         </div>
     );
 };
