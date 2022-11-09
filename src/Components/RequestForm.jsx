@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Input from "./UI/Input";
-import Button from "./UI/Button";
+import MyButton from "./UI/MyButton";
+import Button from "@mui/material/Button";
 
 const RequestForm = ({create}) => {
     const [requestDto, setRequestDto] = useState({receiptDate: '', note: ''});
@@ -23,7 +24,12 @@ const RequestForm = ({create}) => {
                 onChange={e => setRequestDto({...requestDto, note: e.target.value})}
                 type="text"
                 placeholder="Комментарий"/>
-            <Button onClick={addNewRequest}>Создать пост</Button>
+            <Button
+                variant="contained"
+                onClick={addNewRequest}
+            >
+                Создать заявку
+            </Button>
         </form>
     );
 };

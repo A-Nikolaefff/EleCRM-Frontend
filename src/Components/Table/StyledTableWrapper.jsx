@@ -27,7 +27,12 @@ const StyledTable = styled.div`
         border-right: 0;
       }
     }
-  }`;
+  }
+
+  .pagination {
+    padding: 0.5rem;
+  }
+  `;
 
 const StyledTableWrapper = ({children}) => {
     return (

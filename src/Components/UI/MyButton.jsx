@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {primaryColor} from "../../Styles/globalVariables";
+import Button from '@mui/material/Button';
 
 const StyledButton = styled.button`
   padding: 5px 15px;
@@ -10,12 +11,12 @@ const StyledButton = styled.button`
   cursor: pointer;
 `
 
-const Button = ({children, ...props}) => {
+const MyButton = ({children, ...props}) => {
     return (
-        <StyledButton {...props}>
+        <Button variant="contained" {...props}>
             {children}
-        </StyledButton>
+        </Button>
     );
 };
 
-export default Button;
+export default MyButton;

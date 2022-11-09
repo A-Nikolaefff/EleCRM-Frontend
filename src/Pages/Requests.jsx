@@ -6,9 +6,9 @@ import {useFetching} from "../Hooks/useFetching";
 import {useObserver} from "../Hooks/useObserver";
 import Loader from "../Components/UI/Loader";
 import {LastElement} from "../Styles/components";
-import Button from "../Components/UI/Button";
-import Modal from "../Components/UI/Modal";
+
 import RequestForm from "../Components/RequestForm";
+import BasicModal from "../Components/UI/MyModal";
 
 
 const Requests = () => {
@@ -44,16 +44,17 @@ const Requests = () => {
         setModal(false);
     }
 
+
+
+
     return (
         <div>
             <h1>Заявки</h1>
-            <Button onClick={() => setModal(true)}>
-                Добавить заявку
-            </Button>
-            <Modal visible={modal} setVisible={setModal}>
-                <RequestForm create={createRequest}/>
-            </Modal>
 
+
+            <BasicModal visible={modal} setVisible={setModal}>
+                <RequestForm create={createRequest}/>
+            </BasicModal>
 
             {requestError &&
                 <h1>Произошла ошибка ${requestError}</h1>}

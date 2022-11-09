@@ -7,6 +7,12 @@ import Footer from "./Components/BasicPageComponents/Footer";
 import Navbar from "./Components/BasicPageComponents/Navbar";
 import Header from "./Components/BasicPageComponents/Header";
 
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+
 function App() {
     return (
         <BrowserRouter>
@@ -19,7 +25,7 @@ function App() {
                         <AppRouter/>
                     </Container>
                 </Page>
-                <Footer/>
+                {/*<Footer/>*/}
             </PageWrapper>
         </BrowserRouter>
     );
