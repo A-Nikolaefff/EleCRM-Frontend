@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 const style = {
@@ -16,16 +15,15 @@ const style = {
     p: 4,
 };
 
-export default function BasicModal({children}) {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+export default function CreateRequestModal({visible, setVisible, children}) {
+    const handleOpen = () => setVisible(true);
+    const handleClose = () => setVisible(false);
 
     return (
         <div>
             <Button variant="contained" onClick={handleOpen}>Добавить заявку</Button>
             <Modal
-                open={open}
+                open={visible}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"

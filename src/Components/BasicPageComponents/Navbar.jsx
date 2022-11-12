@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {Container} from "../../Styles/basicPageComponents";
-import {fontTitle, mainColor, primaryColor} from "../../Styles/globalVariables";
+import {fontTitle, mainTextColor, hoverTextColor} from "../../Styles/globalVariables";
 
 const StyledNavbar = styled.div`
 `;
@@ -20,13 +20,13 @@ const StyledLink = styled(Link)`
   font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;
-  color: ${mainColor};
+  color: ${mainTextColor};
   transition: color 0.3s ease 0s;
   &:nth-last-child(1) {
     margin: 0 0 0 0;
   }
   &:hover {
-    color: ${primaryColor};
+    color: ${hoverTextColor};
   }
 `
 

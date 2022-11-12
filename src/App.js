@@ -3,15 +3,10 @@ import GlobalStyle from './Styles/globalStyle'
 import {BrowserRouter} from "react-router-dom";
 import AppRouter from "./Components/AppRouter";
 import {Page, PageWrapper, Container} from "./Styles/basicPageComponents";
-import Footer from "./Components/BasicPageComponents/Footer";
 import Navbar from "./Components/BasicPageComponents/Navbar";
 import Header from "./Components/BasicPageComponents/Header";
-
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
+// Connecting fonts
+import '@fontsource/roboto';
 
 function App() {
     return (
@@ -25,7 +20,6 @@ function App() {
                         <AppRouter/>
                     </Container>
                 </Page>
-                {/*<Footer/>*/}
             </PageWrapper>
         </BrowserRouter>
     );

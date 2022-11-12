@@ -1,23 +1,22 @@
 import React, {useEffect, useRef, useState} from 'react';
 import RequestService from "../API/RequestService";
-import RequestList from "../Components/RequestList";
 import {getPageCount} from "../Utils/pages";
 import {useFetching} from "../Hooks/useFetching";
 import {useObserver} from "../Hooks/useObserver";
 import Loader from "../Components/UI/Loader";
 import {LastElement} from "../Styles/components";
-
 import RequestForm from "../Components/RequestForm";
-import BasicModal from "../Components/UI/MyModal";
-
+import CreateRequestModal from "../Components/UI/CreateRequestModal";
+import RequestTable from "../Components/Tables/RequestTable";
 
 const Requests = () => {
     const [requests, setRequests] = useState([]);
-    const [modal, setModal] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
     const [limit, setLimit] = useState(20);
     const [page, setPage] = useState(1);
     const lastElement = useRef();
+
+    const [modalVisible, setModalVisible] = useState(false);
 
     let [fetchRequests, isRequestsLoading, requestError] = useFetching(async (limit, page) => {
         const response = await RequestService.getAll(limit, page);
@@ -41,24 +40,21 @@ const Requests = () => {
 
     const createRequest = (newRequest) => {
         addRequest(newRequest);
-        setModal(false);
+        setModalVisible(false);
     }
-
-
-
 
     return (
         <div>
             <h1>Заявки</h1>
 
-
-            <BasicModal visible={modal} setVisible={setModal}>
+            <CreateRequestModal visible={modalVisible} setVisible={setModalVisible}>
                 <RequestForm create={createRequest}/>
-            </BasicModal>
+            </CreateRequestModal>
 
             {requestError &&
                 <h1>Произошла ошибка ${requestError}</h1>}
-            <RequestList requests={requests}/>
+
+            <RequestTable requests={requests}/>
             <LastElement ref={lastElement}/>
             {(isRequestsLoading || isRequestAdding) &&
                 <Loader/>
