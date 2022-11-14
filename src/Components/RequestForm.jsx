@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import Input from "./UI/Input";
-import MyButton from "./UI/MyButton";
-import Button from "@mui/material/Button";
+
+import BasicButton from "./UI/BasicButton";
+import BasicInput from "./UI/BasicInput";
 
 const RequestForm = ({create}) => {
     const [requestDto, setRequestDto] = useState({receiptDate: '', note: ''});
@@ -14,22 +14,24 @@ const RequestForm = ({create}) => {
 
     return (
         <form>
-            <Input
+            <BasicInput
                 value={requestDto.receiptDate}
                 onChange={e => setRequestDto({...requestDto, receiptDate: e.target.value})}
                 type="date"
+                fullWidth={true}
                 placeholder="Дата заявки"/>
-            <Input
+            <BasicInput
                 value={requestDto.note}
                 onChange={e => setRequestDto({...requestDto, note: e.target.value})}
                 type="text"
+                fullWidth={true}
                 placeholder="Комментарий"/>
-            <Button
+            <BasicButton
                 variant="contained"
                 onClick={addNewRequest}
             >
                 Создать заявку
-            </Button>
+            </BasicButton>
         </form>
     );
 };

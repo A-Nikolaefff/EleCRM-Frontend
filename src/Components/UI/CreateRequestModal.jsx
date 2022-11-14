@@ -1,19 +1,19 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import {styled, Box} from "@mui/material";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '1px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+const StyledBox = styled(Box)`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: white;
+    border: 1px solid #000;
+    padding: 50px;
+    box-shadow: white;
+`;
 
 export default function CreateRequestModal({visible, setVisible, children}) {
     const handleOpen = () => setVisible(true);
@@ -28,9 +28,9 @@ export default function CreateRequestModal({visible, setVisible, children}) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <StyledBox>
                     {children}
-                </Box>
+                </StyledBox>
             </Modal>
         </div>
     );
