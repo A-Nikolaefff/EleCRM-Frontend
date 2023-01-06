@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 
-import BasicButton from "./UI/BasicButton";
-import BasicInput from "./UI/BasicInput";
+import BasicButton from "../UI/BasicButton";
+import BasicInput from "../UI/BasicInput";
+import {Stack} from "@mui/system";
 
-const RequestForm = ({create}) => {
+const CreateRequestForm = ({create, setModalVisible}) => {
     const [requestDto, setRequestDto] = useState({receiptDate: '', note: ''});
+    const handleCloseModal = () => setModalVisible(false);
 
     const addNewRequest = (e) => {
         e.preventDefault();
@@ -26,14 +28,23 @@ const RequestForm = ({create}) => {
                 type="text"
                 fullWidth={true}
                 placeholder="Комментарий"/>
-            <BasicButton
-                variant="contained"
-                onClick={addNewRequest}
-            >
-                Создать заявку
-            </BasicButton>
+            <Stack spacing={3} direction="row">
+                <BasicButton
+                    variant="contained"
+                    onClick={addNewRequest}
+                >
+                    Создать заявку
+                </BasicButton>
+                <BasicButton
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleCloseModal}
+                >
+                    Отмена
+                </BasicButton>
+            </Stack>
         </form>
     );
 };
 
-export default RequestForm;
+export default CreateRequestForm;
