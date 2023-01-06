@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Collapse,
     IconButton,
@@ -12,36 +12,61 @@ import {
 } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import EditIcon from '@mui/icons-material/Edit';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { styled } from '@mui/system';
+import IconModal from "../Modals/IconModal.tsx";
+import EditRequestForm from "../Forms/EditRequestForm";
 
-function Row(props) {
-    const { row } = props;
-    const [open, setOpen] = React.useState(false);
+const IconTableCell = styled(TableCell)({
+    padding: 0,
+    width: 60
+})
+
+function Row({row, index, update, remove}) {
+    const [showSubTable, setShowSubTable] = React.useState(false);
+    const [editingModalVisible, setEditingModalVisible] = useState(false);
 
     return (
         <React.Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-
                 <TableCell component="th" scope="row">
                     {row.id}
                 </TableCell>
                 <TableCell align="right">{row.number}</TableCell>
                 <TableCell align="right">{row.receiptDate}</TableCell>
                 <TableCell align="right">{row.note}</TableCell>
-                <TableCell>
+                <IconTableCell align="center">
                     <IconButton
                         aria-label="expand row"
                         size="small"
-                        onClick={() => setOpen(!open)}
+                        onClick={() => setShowSubTable(!showSubTable)}
                     >
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        {showSubTable ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
-                </TableCell>
+                </IconTableCell>
+                <IconTableCell align="center">
+                    <IconModal
+                        visible={editingModalVisible}
+                        setVisible={setEditingModalVisible}
+                        icon={<EditIcon/>}
+                    >
+                        <h2 id="modal-title">Редактирование заявки № {row.number} от {row.receiptDate}</h2>
+                        <EditRequestForm
+                            row={row}
+                            index={index}
+                            update={update}
+                            remove={remove}
+                            setModalVisible={setEditingModalVisible}/>
+                    </IconModal>
+                </IconTableCell>
             </TableRow>
+
+            {/*Subtable*/}
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Collapse in={showSubTable} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Typography variant="h6" gutterBottom component="div">
                                 SubTable
@@ -74,23 +99,23 @@ function Row(props) {
     );
 }
 
-const RequestTable = ({requests}) => {
+const RequestTable = ({requests, update, remove}) => {
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-
                         <TableCell>ID</TableCell>
                         <TableCell align="right">Number</TableCell>
                         <TableCell align="right">Receipt Date</TableCell>
                         <TableCell align="right">Note</TableCell>
-                        <TableCell />
+                        <IconTableCell align="center"/>
+                        <IconTableCell align="center"/>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {requests.map((request) => (
-                        <Row key={request.id} row={request} />
+                    {requests.map((request, index) => (
+                        <Row key={request.id} index={index} row={request} update={update} remove={remove}/>
                     ))}
                 </TableBody>
             </Table>

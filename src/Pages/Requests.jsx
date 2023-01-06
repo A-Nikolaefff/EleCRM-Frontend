@@ -5,29 +5,40 @@ import {useFetching} from "../Hooks/useFetching";
 import {useObserver} from "../Hooks/useObserver";
 import Loader from "../Components/UI/Loader";
 import {LastElement} from "../Styles/components";
-import RequestForm from "../Components/RequestForm";
-import CreateRequestModal from "../Components/UI/CreateRequestModal";
+import CreateRequestForm from "../Components/Forms/CreateRequestForm";
+import ButtonModal from "../Components/Modals/ButtonModal";
 import RequestTable from "../Components/Tables/RequestTable";
 
 const Requests = () => {
-    const [requests, setRequests] = useState([]);
+    const [localRequests, setLocalRequests] = useState([]);
+
     const [totalPages, setTotalPages] = useState(0);
-    const [limit, setLimit] = useState(20);
+    const [entriesPerPage, setEntriesPerPage] = useState(20);
     const [page, setPage] = useState(1);
     const lastElement = useRef();
 
-    const [modalVisible, setModalVisible] = useState(false);
+    const [creatingModalVisible, setCreatingModalVisible] = useState(false);
 
-    let [fetchRequests, isRequestsLoading, requestError] = useFetching(async (limit, page) => {
-        const response = await RequestService.getAll(limit, page);
-        setRequests([...requests, ...response.data]);
+    let [fetchRequests, isRequestsLoading, requestError] = useFetching(async (entriesPerPage, page) => {
+        const response = await RequestService.getAll(entriesPerPage, page);
+        setLocalRequests([...localRequests, ...response.data]);
         const totalCount = response.headers['x-total-count'];
-        setTotalPages(getPageCount(totalCount, limit));
+        setTotalPages(getPageCount(totalCount, entriesPerPage));
     });
 
     let [addRequest, isRequestAdding, requestAddingError] = useFetching(async (createRequestDto) => {
         const response = await RequestService.Create(createRequestDto);
-        setRequests([response.data, ...requests]);
+        setLocalRequests([response.data, ...localRequests]);
+    });
+
+    let [updateRequest, isRequestUpdating, requestUpdatingError] = useFetching(async (updateRequestDto, editingRowIndex) => {
+        const response = await RequestService.Update(updateRequestDto);
+        setLocalRequests([...localRequests.slice(0, editingRowIndex), response.data, ...localRequests.slice(editingRowIndex + 1)]);
+    });
+
+    let [removeRequest, isRequestRemoving, requestRemovingError] = useFetching(async (id, editingRowIndex) => {
+        const response = await RequestService.Delete(id);
+        setLocalRequests([...localRequests.slice(0, editingRowIndex), ...localRequests.slice(editingRowIndex + 1)]);
     });
 
     useObserver(lastElement, page < totalPages, isRequestsLoading, () => {
@@ -35,26 +46,36 @@ const Requests = () => {
     });
 
     useEffect(() => {
-        fetchRequests(limit, page);
-    }, [limit, page]);
+        fetchRequests(entriesPerPage, page);
+    }, [entriesPerPage, page]);
+
+
 
     const createRequest = (newRequest) => {
         addRequest(newRequest);
-        setModalVisible(false);
+        setCreatingModalVisible(false);
     }
 
     return (
         <div>
             <h1>Заявки</h1>
 
-            <CreateRequestModal visible={modalVisible} setVisible={setModalVisible}>
-                <RequestForm create={createRequest}/>
-            </CreateRequestModal>
+            <ButtonModal
+                visible={creatingModalVisible}
+                setVisible={setCreatingModalVisible}
+                buttonText="Добавить заявку"
+            >
+                <h2 id="modal-title">Создание новой заявки</h2>
+                <CreateRequestForm
+                    create={createRequest}
+                    setModalVisible={setCreatingModalVisible}
+                />
+            </ButtonModal>
 
             {requestError &&
                 <h1>Произошла ошибка ${requestError}</h1>}
 
-            <RequestTable requests={requests}/>
+            <RequestTable requests={localRequests} update={updateRequest} remove={removeRequest}/>
             <LastElement ref={lastElement}/>
             {(isRequestsLoading || isRequestAdding) &&
                 <Loader/>
