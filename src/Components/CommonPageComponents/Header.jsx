@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import {Container} from "../../Styles/basicPageComponents";
+import {Container} from "../../Styles/basicComponents";
 import logo from "../../Assets/Logo.png"
 import {Link} from "react-router-dom";
 

@@ -31,10 +31,7 @@ function Row({row, index, update, remove}) {
     return (
         <React.Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell component="th" scope="row">
-                    {row.id}
-                </TableCell>
-                <TableCell align="right">{row.number}</TableCell>
+                <TableCell align="right" component="th" scope="row">{row.number}</TableCell>
                 <TableCell align="right">{row.receiptDate}</TableCell>
                 <TableCell align="right">{row.note}</TableCell>
                 <IconTableCell align="center">
@@ -105,10 +102,9 @@ const RequestTable = ({requests, update, remove}) => {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>ID</TableCell>
-                        <TableCell align="right">Number</TableCell>
-                        <TableCell align="right">Receipt Date</TableCell>
-                        <TableCell align="right">Note</TableCell>
+                        <TableCell align="right">Номер</TableCell>
+                        <TableCell align="right">Дата получения</TableCell>
+                        <TableCell align="right">Комментарий</TableCell>
                         <IconTableCell align="center"/>
                         <IconTableCell align="center"/>
                     </TableRow>

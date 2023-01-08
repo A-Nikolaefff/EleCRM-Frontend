@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import styled from "styled-components";
-import {Container} from "../../Styles/basicPageComponents";
+import {Container} from "../../Styles/basicComponents";
 import {fontTitle, mainTextColor, hoverTextColor} from "../../Styles/globalVariables";
 
 const StyledNavbar = styled.div`

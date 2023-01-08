@@ -14,3 +14,9 @@ export const PageWrapper = styled.div`
 export const Container = styled.div`
   margin: 0 12px;
 `;
+
+export const LastElement = styled.div`
+  height: 1px;
+  opacity: 1;
+  background-color: #ffffff;
+`

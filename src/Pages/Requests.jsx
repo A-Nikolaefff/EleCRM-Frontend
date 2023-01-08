@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import RequestService from "../API/RequestService";
-import {getPageCount} from "../Utils/pages";
+import {LastElement} from "../Styles/basicComponents";
 import {useFetching} from "../Hooks/useFetching";
 import {useObserver} from "../Hooks/useObserver";
 import Loader from "../Components/UI/Loader";
-import {LastElement} from "../Styles/components";
+import {getPageCount} from "../Utils/pages";
 import CreateRequestForm from "../Components/Forms/CreateRequestForm";
 import ButtonModal from "../Components/Modals/ButtonModal";
 import RequestTable from "../Components/Tables/RequestTable";
@@ -49,8 +49,6 @@ const Requests = () => {
         fetchRequests(entriesPerPage, page);
     }, [entriesPerPage, page]);
 
-
-
     const createRequest = (newRequest) => {
         addRequest(newRequest);
         setCreatingModalVisible(false);
@@ -59,7 +57,6 @@ const Requests = () => {
     return (
         <div>
             <h1>Заявки</h1>
-
             <ButtonModal
                 visible={creatingModalVisible}
                 setVisible={setCreatingModalVisible}
@@ -76,8 +73,9 @@ const Requests = () => {
                 <h1>Произошла ошибка ${requestError}</h1>}
 
             <RequestTable requests={localRequests} update={updateRequest} remove={removeRequest}/>
+
             <LastElement ref={lastElement}/>
-            {(isRequestsLoading || isRequestAdding) &&
+            {(isRequestsLoading || isRequestAdding || isRequestUpdating || isRequestRemoving) &&
                 <Loader/>
             }
         </div>
