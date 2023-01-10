@@ -8,20 +8,30 @@ import {getPageCount} from "../Utils/pages";
 import CreateRequestForm from "../Components/Forms/CreateRequestForm";
 import ButtonModal from "../Components/Modals/ButtonModal";
 import RequestTable from "../Components/Tables/RequestTable";
+import {useRequests} from "../Hooks/useRequests";
+import RequestFilter from "../Components/RequestFilter";
 
 const Requests = () => {
     const [localRequests, setLocalRequests] = useState([]);
+    const [query, setQuery] = useState('');
 
     const [totalPages, setTotalPages] = useState(0);
-    const [entriesPerPage, setEntriesPerPage] = useState(20);
+    const [entriesPerPage] = useState(20);
     const [page, setPage] = useState(1);
     const lastElement = useRef();
 
     const [creatingModalVisible, setCreatingModalVisible] = useState(false);
 
-    let [fetchRequests, isRequestsLoading, requestError] = useFetching(async (entriesPerPage, page) => {
-        const response = await RequestService.getAll(entriesPerPage, page);
-        setLocalRequests([...localRequests, ...response.data]);
+    let [fetchRequests, isRequestsLoading, requestError] = useFetching(
+        async (entriesPerPage, page, query) => {
+        const response = await RequestService.getAll(entriesPerPage, page, query);
+        if (query !== '' && page === 1) {
+            console.log("FetchRequests because query has been changed");
+            setLocalRequests([...response.data]);
+        } else {
+            console.log("FetchRequests because page has been changed");
+            setLocalRequests([...localRequests, ...response.data]);
+        }
         const totalCount = response.headers['x-total-count'];
         setTotalPages(getPageCount(totalCount, entriesPerPage));
     });
@@ -46,8 +56,9 @@ const Requests = () => {
     });
 
     useEffect(() => {
-        fetchRequests(entriesPerPage, page);
-    }, [entriesPerPage, page]);
+        fetchRequests(entriesPerPage, page, query);
+    }, [page, query]);
+
 
     const createRequest = (newRequest) => {
         addRequest(newRequest);
@@ -57,6 +68,14 @@ const Requests = () => {
     return (
         <div>
             <h1>Заявки</h1>
+
+            <RequestFilter
+                filter={query}
+                setFilter={setQuery}
+                setLocalRequests={setLocalRequests}
+                setPage={setPage}
+            />
+
             <ButtonModal
                 visible={creatingModalVisible}
                 setVisible={setCreatingModalVisible}

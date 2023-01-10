@@ -1,12 +1,13 @@
 import axios from "axios";
 
 export default class RequestService {
-    static async getAll(limit = 20, page = 1) {
+    static async getAll(entriesPerPage = 20, currentPage = 1, filter) {
         return await axios.get('/api/requests', {
             params: {
-                limit: limit,
-                page: page,
-                sort: '-id',
+                entriesPerPage: entriesPerPage,
+                currentPage: currentPage,
+                sort: filter.sort,
+                query: filter.query
             }
         });
     }

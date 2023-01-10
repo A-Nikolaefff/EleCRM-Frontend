@@ -5,23 +5,23 @@ import BasicInput from "../UI/BasicInput";
 import {Stack} from "@mui/system";
 
 const CreateRequestForm = ({create, setModalVisible}) => {
-    const [requestDto, setRequestDto] = useState({receiptDate: '', note: ''});
+    const [requestDto, setRequestDto] = useState({receipt: '', note: ''});
     const handleCloseModal = () => setModalVisible(false);
 
     const addNewRequest = (e) => {
         e.preventDefault();
         create(requestDto);
-        setRequestDto({receiptDate: '', note: ''});
+        setRequestDto({receipt: '', note: ''});
     }
 
     return (
         <form>
             <BasicInput
-                value={requestDto.receiptDate}
-                onChange={e => setRequestDto({...requestDto, receiptDate: e.target.value})}
-                type="date"
+                value={requestDto.receipt}
+                onChange={e => setRequestDto({...requestDto, receipt: e.target.value})}
+                type="datetime-local"
                 fullWidth={true}
-                placeholder="Дата заявки"/>
+                placeholder="Дата и время заявки"/>
             <BasicInput
                 value={requestDto.note}
                 onChange={e => setRequestDto({...requestDto, note: e.target.value})}

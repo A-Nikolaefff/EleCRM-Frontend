@@ -32,7 +32,7 @@ function Row({row, index, update, remove}) {
         <React.Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell align="right" component="th" scope="row">{row.number}</TableCell>
-                <TableCell align="right">{row.receiptDate}</TableCell>
+                <TableCell align="right">{row.receipt}</TableCell>
                 <TableCell align="right">{row.note}</TableCell>
                 <IconTableCell align="center">
                     <IconButton
@@ -49,7 +49,7 @@ function Row({row, index, update, remove}) {
                         setVisible={setEditingModalVisible}
                         icon={<EditIcon/>}
                     >
-                        <h2 id="modal-title">Редактирование заявки № {row.number} от {row.receiptDate}</h2>
+                        <h2 id="modal-title">Редактирование заявки № {row.number} от {row.receipt}</h2>
                         <EditRequestForm
                             row={row}
                             index={index}
@@ -83,7 +83,7 @@ function Row({row, index, update, remove}) {
                                             {row.id}
                                         </TableCell>
                                         <TableCell align="right">{row.number}</TableCell>
-                                        <TableCell align="right">{row.receiptDate}</TableCell>
+                                        <TableCell align="right">{row.receipt}</TableCell>
                                         <TableCell align="right">{row.note}</TableCell>
                                     </TableRow>
                                 </TableBody>
